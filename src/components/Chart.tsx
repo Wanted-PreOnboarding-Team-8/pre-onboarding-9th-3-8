@@ -48,9 +48,19 @@ const Chart = () => {
       }}
     >
       <CartesianGrid stroke="#f5f5f5" />
-      <XAxis dataKey="time" />
-      <YAxis yAxisId="left" />
-      <YAxis yAxisId="right" orientation="right" />
+      <XAxis
+        dataKey="time"
+        label={{ value: 'time', position: 'insideBottomRight', offset: -10 }}
+      />
+      <YAxis
+        yAxisId="left"
+        label={{ value: 'value_area', position: 'top', offset: 10 }}
+      />
+      <YAxis
+        yAxisId="right"
+        orientation="right"
+        label={{ value: 'value_bar', position: 'top', offset: 10 }}
+      />
       <Tooltip content={<CustomTooltip />} />
       <Legend />
       <Bar yAxisId="right" dataKey="value_bar" fill="#413ea0" />
