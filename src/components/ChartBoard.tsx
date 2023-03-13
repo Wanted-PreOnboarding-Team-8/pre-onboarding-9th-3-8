@@ -4,6 +4,7 @@ import {
   dataReducer,
   initialDatasetState as initData,
 } from '@/reducers/dataReducer';
+import { IData } from '@/interface/data';
 
 const ChartBoard = () => {
   const [data, dispatch] = useReducer(dataReducer, initData);
@@ -24,7 +25,7 @@ const ChartBoard = () => {
       </div>
       <div>
         {data.response.length > 0 &&
-          data.response.map((ele: any) => (
+          data.response.map((ele: IData) => (
             <div key={ele.tid}>
               {ele.tid} - {ele.id} - {ele.value_area} - {ele.value_bar}
             </div>

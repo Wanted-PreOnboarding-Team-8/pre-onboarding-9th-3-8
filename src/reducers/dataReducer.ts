@@ -10,7 +10,10 @@ export const initialDatasetState = {
 export const dataReducer = (state: IDataSet, action: dataSetActionType) => {
   switch (action.type) {
     case 'fetch-success':
-      return transObjToArr(state, action);
+      return {
+        ...action.payload,
+        response: transObjToArr(action),
+      };
     //    case 'fetch-fail':
     default:
       throw Error('no action type matched');
