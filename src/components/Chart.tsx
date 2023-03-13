@@ -11,6 +11,7 @@ import {
   Area,
   ComposedChart,
 } from 'recharts';
+import CustomTooltip from './CustomTooltip';
 
 export interface Chartdata {
   id: string;
@@ -50,7 +51,7 @@ const Chart = () => {
       <XAxis dataKey="time" />
       <YAxis yAxisId="left" />
       <YAxis yAxisId="right" orientation="right" />
-      <Tooltip />
+      <Tooltip content={<CustomTooltip />} />
       <Legend />
       <Bar yAxisId="right" dataKey="value_bar" fill="#413ea0" />
       <Area
