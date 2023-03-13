@@ -1,5 +1,11 @@
+import Chart from './components/Chart';
+
 const App = () => {
-  return <div className="App">Template</div>;
+  return (
+    <>
+      <Chart />
+    </>
+  );
 };
 
 export default App;
