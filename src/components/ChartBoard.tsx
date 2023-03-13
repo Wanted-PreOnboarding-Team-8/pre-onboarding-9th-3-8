@@ -5,6 +5,7 @@ import {
   initialDatasetState as initData,
 } from '@/reducers/dataReducer';
 import { IData } from '@/interface/data';
+import ChartCanvas from './ChartCanvas';
 
 const ChartBoard = () => {
   const [data, dispatch] = useReducer(dataReducer, initData);
@@ -23,14 +24,7 @@ const ChartBoard = () => {
         <p>type: {data.type}</p>
         <p>version: {data.version}</p>
       </div>
-      <div>
-        {data.response.length > 0 &&
-          data.response.map((ele: IData) => (
-            <div key={ele.tid}>
-              {ele.tid} - {ele.id} - {ele.value_area} - {ele.value_bar}
-            </div>
-          ))}
-      </div>
+      <ChartCanvas data={data.response} />
     </div>
   );
 };
