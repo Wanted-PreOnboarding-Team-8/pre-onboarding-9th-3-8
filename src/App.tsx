@@ -1,9 +1,10 @@
-import BarAreaChart from './components/BarAreaChart';
+import TimeSeriesChart from './components/TimeSeriesChart';
 
 const App = () => {
   return (
     <div className="App">
-      <BarAreaChart />
+      <h1>Chart</h1>
+      <TimeSeriesChart />
     </div>
   );
 };

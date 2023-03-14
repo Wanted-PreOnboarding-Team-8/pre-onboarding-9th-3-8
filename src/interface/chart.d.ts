@@ -1,7 +1,7 @@
 export interface IChartData {
-  [string]: {
+  [key: string]: {
     id: string;
     value_area: number;
-    value_bar: 12111;
+    value_bar: number;
   };
 }
