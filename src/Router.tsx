@@ -1,5 +1,14 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Chart from './pages/Chart';
+
 const Router = () => {
-  return <div>Router</div>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Chart />} />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export default Router;
