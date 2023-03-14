@@ -1,4 +1,5 @@
 import chartApi from '@/api/chart';
+import { Chartdata } from '@/interface/Chart';
 import transformData from '@/lib/utils/transformData';
 import { useEffect, useState } from 'react';
 import {
@@ -12,12 +13,6 @@ import {
   ComposedChart,
 } from 'recharts';
 import CustomTooltip from './CustomTooltip';
-
-export interface Chartdata {
-  id: string;
-  value_area: number;
-  value_bar: number;
-}
 
 const Chart = () => {
   const [chartDatas, setChartDatas] = useState<Chartdata[]>([]);
