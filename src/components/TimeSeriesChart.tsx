@@ -13,12 +13,10 @@ import {
   LineController,
   BarController,
   ChartData,
-  ChartTypeRegistry,
-  Point,
-  BubbleDataPoint,
   Filler,
   ChartOptions,
 } from 'chart.js';
+import { getChartData, getChartOptions } from '@/lib/utils/chartHelpers';
 ChartJS.register(
   LinearScale,
   CategoryScale,
@@ -32,69 +30,38 @@ ChartJS.register(
   BarController,
 );
 
-const BarAreaChart = () => {
-  const [data, setData] =
-    useState<
-      ChartData<
-        keyof ChartTypeRegistry,
-        (number | [number, number] | Point | BubbleDataPoint | null)[],
-        unknown
-      >
-    >();
-  const options: ChartOptions = {
-    scales: {
-      bar: {
-        type: 'linear',
-        position: 'left',
-      },
-      area: {
-        type: 'linear',
-        position: 'right',
-      },
-    },
-    animation: {
-      duration: 0,
-    },
-  };
+const TimeSeriesChart = () => {
+  const [data, setData] = useState<ChartData>();
+  const [options, setOptions] = useState<ChartOptions>();
 
   useEffect(() => {
-    getData()
-      .then((res) => {
-        const chartData = res.data.response;
+    const getChart = async () => {
+      try {
+        const chartData = (await getData()).data.response;
+
         const labels = Object.keys(chartData);
+        const areaData = labels.map((label) => chartData[label].value_area);
+        const barData = labels.map((label) => chartData[label].value_bar);
 
-        const areaValues = labels.map((label) => chartData[label].value_area);
-        const barValues = labels.map((label) => chartData[label].value_bar);
+        const setTooltipOption = (label: string) => {
+          const chart = chartData[label];
+          return [
+            chart.id,
+            `value_bar : ${chart.value_bar}`,
+            `value_area : ${chart.value_area}`,
+          ];
+        };
 
-        setData({
-          labels,
-          datasets: [
-            {
-              type: 'line' as const,
-              label: 'Area',
-              borderColor: 'rgb(255, 99, 132)',
-              borderWidth: 2,
-              fill: true,
-              data: areaValues,
-              yAxisID: 'area',
-              backgroundColor: 'rgba(53, 162, 235, 0.3)',
-            },
-            {
-              type: 'bar' as const,
-              label: 'Bar',
-              backgroundColor: 'rgb(75, 192, 192)',
-              data: barValues,
-              borderColor: 'white',
-              borderWidth: 2,
-              yAxisID: 'bar',
-            },
-          ],
-        });
-      })
-      .catch((e) => console.error(e));
-  });
+        setData(getChartData(labels, areaData, barData));
+        setOptions(getChartOptions(setTooltipOption));
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    getChart();
+  }, []);
 
   return <>{data && <Chart type="bar" data={data} options={options} />}</>;
 };
 
-export default BarAreaChart;
+export default TimeSeriesChart;
