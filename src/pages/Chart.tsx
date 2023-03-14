@@ -1,53 +1,95 @@
 import React from 'react';
-import ApexChart from "apexcharts";
+import useChart from '@/lib/hooks/useChart';
+import ApexChart from 'react-apexcharts';
 
 const Chart = () => {
-  return <div>
-    <ApexChart
-      series: [{
-        name: 'Website Blog',
-        type: 'column',
-        data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
-      }, {
-        name: 'Social Media',
-        type: 'line',
-        data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
-      }],
-      options: {
-        chart: {
-          height: 350,
-          type: 'line',
-        },
-        stroke: {
-          width: [0, 4]
-        },
-        title: {
-          text: 'Traffic Sources'
-        },
-        dataLabels: {
-          enabled: true,
-          enabledOnSeries: [1]
-        },
-        labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
-        xaxis: {
-          type: 'datetime'
-        },
-        yaxis: [{
-          title: {
-            text: 'Website Blog',
-          },
-        
-        }, {
-          opposite: true,
-          title: {
-            text: 'Social Media'
-          }
-        }]
-      },
-    >
+  const { chartDate, chartValue } = useChart();
 
-    </ApexChart>
-  </div>;
+  return (
+    <div>
+      <ApexChart
+        series={[
+          {
+            name: 'value_area',
+            type: 'area',
+            data: chartValue.map((element) => element.value_area),
+          },
+          {
+            name: 'value_bar',
+            type: 'column',
+            data: chartValue.map((element) => element.value_bar),
+          },
+        ]}
+        options={{
+          chart: {
+            height: 350,
+            type: 'line',
+            stacked: false,
+          },
+          stroke: {
+            width: [0, 2],
+            curve: 'smooth',
+          },
+          plotOptions: {
+            bar: {
+              columnWidth: '100%',
+            },
+          },
+          fill: {
+            opacity: [0.85, 0.25],
+            gradient: {
+              inverseColors: false,
+              shade: 'light',
+              type: 'vertical',
+              opacityFrom: 0.85,
+              opacityTo: 0.55,
+              stops: [0, 100, 100, 100],
+            },
+          },
+          title: {
+            text: 'Flexsys',
+          },
+
+          labels: chartDate.map((element) => element),
+          xaxis: {
+            type: 'datetime',
+          },
+          yaxis: [
+            {
+              title: {
+                text: 'Area',
+              },
+            },
+            {
+              opposite: true,
+              title: {
+                text: 'Bar',
+              },
+            },
+          ],
+          tooltip: {
+            shared: true,
+            intersect: false,
+            custom: function ({ dataPointIndex }) {
+              return (
+                '<ul>' +
+                '<li><b>id</b>: ' +
+                chartValue[dataPointIndex].id +
+                '</li>' +
+                '<li><b>value_area</b>: ' +
+                chartValue[dataPointIndex].value_area +
+                '</li>' +
+                '<li><b>value_bar</b>: ' +
+                chartValue[dataPointIndex].value_bar +
+                '</li>' +
+                '</ul>'
+              );
+            },
+          },
+        }}
+      ></ApexChart>
+    </div>
+  );
 };
 
 export default Chart;
