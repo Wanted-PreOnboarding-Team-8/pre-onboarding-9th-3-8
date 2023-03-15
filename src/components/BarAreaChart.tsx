@@ -12,7 +12,7 @@ import {
 import CustomTooltip from '@/components/CustomTooltips';
 import { IChartProps } from '@/interface/props';
 
-const Chart = ({ data, start, end }: IChartProps) => {
+const BarAreaChart = ({ data, start, end }: IChartProps) => {
   return (
     <>
       <h1>{`${start} ~ ${end}`}</h1>
@@ -63,4 +63,4 @@ const Chart = ({ data, start, end }: IChartProps) => {
   );
 };
 
-export default Chart;
+export default BarAreaChart;

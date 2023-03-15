@@ -1,9 +1,6 @@
 import { TooltipProps } from 'recharts';
 
-const CustomTooltip = ({
-  active,
-  payload,
-}: TooltipProps<number, string>): JSX.Element | null => {
+const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
   if (active && payload && payload.length) {
     const [bar, area] = payload;
     return (

@@ -1,9 +1,9 @@
-export interface IData {
+export interface IRawData {
   id: string;
   value_area: number;
   value_bar: number;
 }
 
-export interface IChart extends IData {
-  date: string;
+export interface IChartDataset extends IRawData {
+  dateTime: string;
 }

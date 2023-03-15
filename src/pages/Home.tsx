@@ -1,12 +1,12 @@
-import Chart from '@/components/Chart';
-import useChart from '@/lib/hooks/useChart';
+import { useChartDatasets } from '@/lib/hooks/useChartDatasets';
+import BarAreaChart from '@/components/BarAreaChart';
 
 const Home = () => {
-  const { charts, start, end } = useChart();
+  const { chartDatasets, startDate, endDate } = useChartDatasets();
 
   return (
     <div className="outer">
-      <Chart data={charts} start={start} end={end} />
+      <BarAreaChart data={chartDatasets} start={startDate} end={endDate} />
     </div>
   );
 };
