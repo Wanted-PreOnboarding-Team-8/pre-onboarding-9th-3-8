@@ -8,16 +8,16 @@ const useChart = () => {
   });
   const { chartDate, chartValue } = charts;
 
-  const getCharts = () => {
-    chart.getChartsAPI().then((res) =>
-      setCharts({
-        chartDate: Object.keys(res.response),
-        chartValue: Object.values(res.response),
-      }),
-    );
-  };
-
   useEffect(() => {
+    const getCharts = () => {
+      chart.getChartsAPI().then((res) =>
+        setCharts({
+          chartDate: Object.keys(res.response),
+          chartValue: Object.values(res.response),
+        }),
+      );
+    };
+
     getCharts();
   }, []);
 
