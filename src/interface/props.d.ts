@@ -7,5 +7,5 @@ export interface IChartProps {
 }
 
 export interface IChartRegionSelectProps {
-  region: string[];
+  regions: string[];
 }

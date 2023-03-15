@@ -1,30 +1,28 @@
 import { IChartRegionSelectProps } from '@/interface/props';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
-const ChartRegionSelect = ({ region }: IChartRegionSelectProps) => {
+const ChartRegionSelect = ({ regions }: IChartRegionSelectProps) => {
   const navigate = useNavigate();
 
-  const [activeButton, setActiveButton] = useState('');
+  const [searchParams] = useSearchParams();
+  const region = searchParams.get('region');
 
   const handleClick = (id: string) => {
-    setActiveButton(id);
     navigate(`?region=${id}`);
   };
 
   const handleResetButton = () => {
-    setActiveButton('');
     navigate('/');
   };
 
   return (
     <div>
-      {region.map((id) => {
+      {regions.map((id) => {
         return (
           <button
             key={id}
             onClick={() => handleClick(id)}
-            className={`btn ${activeButton === id ? 'active' : ''}`}
+            className={`btn ${region === id ? 'active' : ''}`}
           >
             {id}
           </button>

@@ -8,7 +8,7 @@ import { transformData, transformRegion } from '../utils/transformData';
 const useChart = () => {
   const [charts, setCharts] = useState<IChart[]>([]);
   const { start, end } = generateStartAndEndDate(charts);
-  const region = transformRegion(charts);
+  const regions = transformRegion(charts);
 
   useEffect(() => {
     const getCharts = async () => {
@@ -24,7 +24,7 @@ const useChart = () => {
     getCharts();
   }, []);
 
-  return { charts, start, end, region };
+  return { charts, start, end, regions };
 };
 
 export default useChart;
