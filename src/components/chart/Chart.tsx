@@ -9,10 +9,13 @@ import {
   ComposedChart,
   ResponsiveContainer,
 } from 'recharts';
-import CustomTooltip from '@/components/CustomTooltips';
+import CustomTooltip from '@/components/chart/CustomTooltips';
 import { IChartProps } from '@/interface/props';
 
-const Chart = ({ data, start, end }: IChartProps) => {
+const Chart = ({ data, start, end, filterParams }: IChartProps) => {
+  const paramsId = filterParams.get('id');
+
+  console.log(paramsId);
   return (
     <>
       <h1>{`${start} ~ ${end}`}</h1>
@@ -46,7 +49,7 @@ const Chart = ({ data, start, end }: IChartProps) => {
             <Bar
               yAxisId="left"
               dataKey="value_bar"
-              fill="#868e96"
+              fill={'#868e96'}
               barSize={20}
             />
             <Area
