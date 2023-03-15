@@ -18,6 +18,10 @@ const Chart = ({ data, start, end }: IChartProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const region = searchParams.get('region');
 
+  const handleSearchParams = (id: string) => {
+    setSearchParams({ region: id });
+  };
+
   return (
     <>
       <h1>{`${start} ~ ${end}`}</h1>
@@ -54,6 +58,7 @@ const Chart = ({ data, start, end }: IChartProps) => {
                   cursor="pointer"
                   fill={v.id === region ? '#82ca9d' : '#999'}
                   key={v.date}
+                  onClick={() => handleSearchParams(v.id)}
                 />
               ))}
             </Bar>
