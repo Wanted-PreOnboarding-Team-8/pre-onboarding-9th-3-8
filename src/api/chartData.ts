@@ -1,6 +1,7 @@
 import apiClient from '@/api';
+import { IFetchData } from '@/interface/chartData';
 
-export const getData = (url: string) => {
+export const getData = (url: string): Promise<{ data: IFetchData }> => {
   try {
     return apiClient.get(url);
   } catch (e) {

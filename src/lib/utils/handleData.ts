@@ -1,16 +1,30 @@
-import { IChartDataset } from '@/interface/chartData';
+import { IFetchData, IChartDataset, IChartValue } from '@/interface/chartData';
 
-export const transformData = (res: IChartDataset[]) => {
+export const transformData = (fetched: IFetchData): IChartDataset => {
+  const copy: IChartDataset = {
+    type: fetched.type,
+    version: fetched.version,
+    value: [],
+  };
+
+  const res = fetched.response;
+
   for (const key in res) {
-    res[key].dateTime = key;
+    copy.value.push({
+      dateTime: key,
+      id: res[key].id,
+      value_area: res[key].value_area,
+      value_bar: res[key].value_bar,
+    });
   }
-  return Object.values(res);
+
+  return copy;
 };
 
 const calcMaxDate = (dates: Date[]) => new Date(Math.max(...dates.map(Number)));
 const calcMinDate = (dates: Date[]) => new Date(Math.min(...dates.map(Number)));
 
-export const deriveStartAndEndDate = (data: IChartDataset[]) => {
+export const deriveStartAndEndDate = (data: IChartValue[]) => {
   const dateList = data.map(({ dateTime }) => new Date(dateTime));
 
   const minDate = calcMinDate(dateList);

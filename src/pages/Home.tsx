@@ -6,7 +6,11 @@ const Home = () => {
 
   return (
     <div className="outer">
-      <BarAreaChart data={chartDatasets} start={startDate} end={endDate} />
+      <BarAreaChart
+        data={chartDatasets.value}
+        start={startDate}
+        end={endDate}
+      />
     </div>
   );
 };

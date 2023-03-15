@@ -1,7 +1,7 @@
-import { IChartDataset } from './chartData';
+import { IChartValue } from './chartData';
 
 export interface IChartProps {
-  data: IChartDataset[];
+  data: IChartValue[];
   start: string;
   end: string;
 }
