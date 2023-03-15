@@ -5,3 +5,8 @@ export interface IChartProps {
   start: string;
   end: string;
 }
+
+export interface IChartHeaderProps {
+  type: string;
+  version: number;
+}
