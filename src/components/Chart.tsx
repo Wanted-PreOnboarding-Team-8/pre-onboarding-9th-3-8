@@ -8,11 +8,16 @@ import {
   Bar,
   ComposedChart,
   ResponsiveContainer,
+  Cell,
 } from 'recharts';
 import CustomTooltip from '@/components/CustomTooltips';
 import { IChartProps } from '@/interface/props';
+import { useSearchParams } from 'react-router-dom';
 
 const Chart = ({ data, start, end }: IChartProps) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const region = searchParams.get('region');
+
   return (
     <>
       <h1>{`${start} ~ ${end}`}</h1>
@@ -43,12 +48,15 @@ const Chart = ({ data, start, end }: IChartProps) => {
               wrapperStyle={{ outline: 'none' }}
             />
             <Legend />
-            <Bar
-              yAxisId="left"
-              dataKey="value_bar"
-              fill="#868e96"
-              barSize={20}
-            />
+            <Bar yAxisId="left" dataKey="value_bar" barSize={20}>
+              {data.map((v) => (
+                <Cell
+                  cursor="pointer"
+                  fill={v.id === region ? '#82ca9d' : '#999'}
+                  key={v.date}
+                />
+              ))}
+            </Bar>
             <Area
               yAxisId="right"
               type="monotone"
