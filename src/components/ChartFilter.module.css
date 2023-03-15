@@ -1,0 +1,6 @@
+.filter_list {
+  display: flex;
+}
+.filter_item {
+  list-style: none;
+}

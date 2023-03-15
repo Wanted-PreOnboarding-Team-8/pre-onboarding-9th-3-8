@@ -11,6 +11,7 @@ import {
 } from 'recharts';
 import CustomTooltip from '@/components/CustomTooltips';
 import { IChartProps } from '@/interface/props';
+import { IChart } from '@/interface/chartData';
 
 const Chart = ({ data, start, end }: IChartProps) => {
   return (
@@ -19,7 +20,7 @@ const Chart = ({ data, start, end }: IChartProps) => {
       <div className="inner">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart
-            data={data}
+            data={data as IChart[]}
             margin={{
               top: 40,
               right: 30,
