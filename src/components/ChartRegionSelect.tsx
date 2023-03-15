@@ -1,15 +1,28 @@
 import { IChartRegionSelectProps } from '@/interface/props';
+import { useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const ChartRegionSelect = ({ regions }: IChartRegionSelectProps) => {
   const navigate = useNavigate();
 
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const region = searchParams.get('region');
 
-  const handleClick = (id: string) => {
-    navigate(`?region=${id}`);
-  };
+  const handleClick = useCallback(
+    (id: string) => {
+      const regionList = region?.split(',') || [];
+      const regionIndex = regionList.indexOf(id);
+
+      if (regionIndex === -1) {
+        regionList.push(id);
+      } else {
+        regionList.splice(regionIndex, 1);
+      }
+
+      setSearchParams({ region: regionList.join(',') });
+    },
+    [region, setSearchParams],
+  );
 
   const handleResetButton = () => {
     navigate('/');
@@ -22,7 +35,7 @@ const ChartRegionSelect = ({ regions }: IChartRegionSelectProps) => {
           <button
             key={id}
             onClick={() => handleClick(id)}
-            className={`btn ${region === id ? 'active' : ''}`}
+            className={`btn ${region?.split(',').includes(id) ? 'active' : ''}`}
           >
             {id}
           </button>
