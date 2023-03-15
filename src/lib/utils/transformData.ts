@@ -1,10 +1,12 @@
 import { IChart } from '@/interface/chartData';
 
-const transformData = (res: IChart[]) => {
+export const transformData = (res: IChart[]) => {
   for (const key in res) {
     res[key].date = key;
   }
   return Object.values(res);
 };
 
-export default transformData;
+export const transformRegion = (charts: IChart[]): string[] => {
+  return Array.from(new Set(charts.map((chart) => chart.id)));
+};
