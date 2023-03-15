@@ -35,3 +35,18 @@ span.area_value {
   color: #ff8787;
   font-weight: bold;
 }
+
+.btn {
+  font-size: 20px;
+  padding: 5px;
+  margin: 20px;
+  border: 1px solid #868e96;
+  border-radius: 3px;
+  background-color: #868e96;
+}
+
+.active {
+  background-color: #82ca9d;
+  border: 1px solid #82ca9d;
+  border-radius: 3px;
+}
