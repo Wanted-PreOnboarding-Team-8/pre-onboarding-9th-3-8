@@ -1,4 +1,4 @@
-import { FilterList } from './FilterList';
+import FilterList from './FilterList';
 import TagList from './TagList';
 
 type Props = {

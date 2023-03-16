@@ -11,10 +11,27 @@ import {
   ReferenceArea,
 } from 'recharts';
 import CustomTooltip from '@/components/CustomTooltips';
-import { IChartProps } from '@/interface/props';
 import { IChart } from '@/interface/chartData';
+import { useSearchParams } from 'react-router-dom';
+import { CategoricalChartState } from 'recharts/types/chart/generateCategoricalChart';
+import { getfilteredData } from '@/lib/utils/chartHelper';
 
-const Chart = ({ data, filteredData }: IChartProps) => {
+type Props = {
+  data: IChart[];
+};
+
+const Chart = ({ data }: Props) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const idfilterList = searchParams.getAll('id');
+  const filteredData = getfilteredData(data, idfilterList);
+
+  const onClickData = (e: CategoricalChartState) => {
+    if (e === null) return;
+    if (e.activePayload === undefined) return;
+    const value: IChart = e.activePayload[0].payload;
+    setSearchParams({ id: value.id });
+  };
+
   return (
     <div className="inner">
       <ResponsiveContainer width="100%" height="100%">
@@ -25,6 +42,7 @@ const Chart = ({ data, filteredData }: IChartProps) => {
             right: 30,
             left: 20,
           }}
+          onClick={onClickData}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
