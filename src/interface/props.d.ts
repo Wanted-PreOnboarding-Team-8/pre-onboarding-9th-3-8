@@ -10,8 +10,8 @@ export interface IChartHeaderProps {
   type: string;
   version: number;
   period: {
-    start: string;
-    end: string;
+    startDate: string;
+    endDate: string;
   };
 }
 

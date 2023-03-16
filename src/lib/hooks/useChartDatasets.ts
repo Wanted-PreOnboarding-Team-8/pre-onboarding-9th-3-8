@@ -25,5 +25,5 @@ export const useChartDatasets = () => {
     getCharts();
   }, []);
 
-  return { chartDatasets, startDate, endDate };
+  return { chartDatasets, period: { startDate, endDate } };
 };

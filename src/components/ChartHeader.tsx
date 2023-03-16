@@ -6,7 +6,7 @@ const ChartHeader = ({ type, version, period }: IChartHeaderProps) => {
       <p>타입 : {type}</p>
       <p>버전 : {version}</p>
       <p>
-        기간 : {period.start} ~ {period.end}
+        기간 : {period.startDate} ~ {period.endDate}
       </p>
     </div>
   );

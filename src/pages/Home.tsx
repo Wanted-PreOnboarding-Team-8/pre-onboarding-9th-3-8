@@ -6,7 +6,7 @@ import BarAreaChart from '@/components/barAreaChart/Chart';
 import { getRegionList } from '@/lib/utils/handleData';
 
 const Home = () => {
-  const { chartDatasets, startDate, endDate } = useChartDatasets();
+  const { chartDatasets, period } = useChartDatasets();
   const { filtered, setFilter } = useFilter();
 
   return (
@@ -15,7 +15,7 @@ const Home = () => {
         <ChartHeader
           type={chartDatasets.type}
           version={chartDatasets.version}
-          period={{ start: startDate, end: endDate }}
+          period={period}
         />
         <ChartFilters
           regions={getRegionList(chartDatasets.value)}
