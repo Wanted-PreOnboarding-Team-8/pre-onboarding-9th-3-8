@@ -15,7 +15,11 @@ const ChartFilters = ({
           <button
             className={region === selected ? 'selected_filter_btn' : ''}
             key={region}
-            onClick={() => setFiltered(!selected ? region : null)}
+            onClick={() =>
+              setFiltered(
+                !selected ? region : selected !== region ? region : null,
+              )
+            }
           >
             {region}
           </button>
