@@ -11,7 +11,11 @@ const Home = () => {
 
   return (
     <div className="outer">
-      <ChartHeader type={chartDatasets.type} version={chartDatasets.version} />
+      <ChartHeader
+        type={chartDatasets.type}
+        version={chartDatasets.version}
+        period={{ start: startDate, end: endDate }}
+      />
       <ChartFilters
         regions={getRegionList(chartDatasets.value)}
         filtered={filtered}
@@ -19,8 +23,6 @@ const Home = () => {
       />
       <BarAreaChart
         data={chartDatasets.value}
-        start={startDate}
-        end={endDate}
         filtered={filtered}
         setFiltered={setFiltered}
       />

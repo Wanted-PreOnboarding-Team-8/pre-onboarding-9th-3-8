@@ -12,14 +12,9 @@ import {
 } from 'recharts';
 import CustomTooltip from '@/components/barAreaChart/CustomTooltips';
 import { IChartProps } from '@/interface/props';
+import { CategoricalChartState } from 'recharts/types/chart/generateCategoricalChart';
 
-const BarAreaChart = ({
-  data,
-  start,
-  end,
-  filtered,
-  setFiltered,
-}: IChartProps) => {
+const BarAreaChart = ({ data, filtered, setFiltered }: IChartProps) => {
   if (filtered) {
     data = data.map((e) => {
       return {
@@ -29,9 +24,13 @@ const BarAreaChart = ({
     });
   }
 
+  const onClickChart = (e: CategoricalChartState) => {
+    const selected = e?.activePayload?.[0].payload?.id;
+    setFiltered(!filtered ? selected : filtered !== selected ? selected : null);
+  };
+
   return (
     <>
-      <h1>{`${start} ~ ${end}`}</h1>
       <div className="inner">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart
@@ -41,12 +40,7 @@ const BarAreaChart = ({
               right: 30,
               left: 20,
             }}
-            onClick={(e) => {
-              const selected = e?.activePayload?.[0].payload?.id;
-              setFiltered(
-                !filtered ? selected : filtered !== selected ? selected : null,
-              );
-            }}
+            onClick={onClickChart}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="dateTime" />
@@ -67,20 +61,18 @@ const BarAreaChart = ({
             <Bar yAxisId="left" dataKey="value_bar" fill="#868e96" barSize={20}>
               {data.map((e) => (
                 <Cell
-                  style={{ zIndex: 1 }}
                   key={e.dateTime}
                   fill={filtered === e.id ? 'red' : '#868e96'}
-                  order={99}
                 />
               ))}
             </Bar>
             <Area
-              style={{ zIndex: 2 }}
               yAxisId="right"
               type="monotone"
               dataKey="value_area"
               stroke="#ff8787"
-              fill="#ffa8a8"
+              fill="#ff8787"
+              opacity={1}
               animationDuration={500}
             />
             {filtered && (
@@ -102,9 +94,3 @@ const BarAreaChart = ({
 };
 
 export default BarAreaChart;
-
-//  TODO
-//  private 분리, 옵션 먹인것 props로 전달받기
-//const StyledBarChart = (styleProp) => {}
-//const StyledAreaChart = (styleProp) => {}
-//const StyledHighlight = (styleProp) => {}

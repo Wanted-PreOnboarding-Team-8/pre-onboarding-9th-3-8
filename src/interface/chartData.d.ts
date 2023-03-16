@@ -10,7 +10,7 @@ export interface IFetchData {
   };
 }
 
-interface IChartValue {
+export interface IChartValue {
   dateTime: string;
   id: string;
   value_area: number;
