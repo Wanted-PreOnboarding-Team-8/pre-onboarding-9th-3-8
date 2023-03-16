@@ -39,3 +39,7 @@ export const deriveStartAndEndDate = (data: IChartValue[]) => {
 
   return { startDate, endDate };
 };
+
+export const getRegionList = (data: IChartValue[]): string[] => {
+  return Array.from(new Set(data.map((e) => e.id)));
+};

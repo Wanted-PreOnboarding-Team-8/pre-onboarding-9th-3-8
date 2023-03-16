@@ -10,29 +10,24 @@ import {
   ComposedChart,
   ResponsiveContainer,
 } from 'recharts';
-import { useState } from 'react';
-import CustomTooltip from '@/components/CustomTooltips';
-import { CategoricalChartState } from 'recharts/types/chart/generateCategoricalChart';
+import CustomTooltip from '@/components/barAreaChart/CustomTooltips';
 import { IChartProps } from '@/interface/props';
 
-const BarAreaChart = ({ data, start, end }: IChartProps) => {
-  const [clickedRegion, setClickedRegion] = useState<string | null>(null);
-
-  if (clickedRegion) {
+const BarAreaChart = ({
+  data,
+  start,
+  end,
+  filtered,
+  setFiltered,
+}: IChartProps) => {
+  if (filtered) {
     data = data.map((e) => {
       return {
         ...e,
-        value_highlight: e.id === clickedRegion ? e.value_area : null,
+        value_highlight: e.id === filtered ? e.value_area : null,
       };
     });
   }
-
-  const onClickChart = (clicked: CategoricalChartState) => {
-    if (clicked?.activeLabel) {
-      const clickedData = data.find((e) => e.dateTime === clicked.activeLabel);
-      setClickedRegion(!clickedData ? null : clickedData.id);
-    }
-  };
 
   return (
     <>
@@ -46,7 +41,12 @@ const BarAreaChart = ({ data, start, end }: IChartProps) => {
               right: 30,
               left: 20,
             }}
-            onClick={onClickChart}
+            onClick={(e) => {
+              const selected = e?.activePayload?.[0].payload?.id;
+              setFiltered(
+                !filtered ? selected : filtered !== selected ? selected : null,
+              );
+            }}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="dateTime" />
@@ -69,7 +69,7 @@ const BarAreaChart = ({ data, start, end }: IChartProps) => {
                 <Cell
                   style={{ zIndex: 1 }}
                   key={e.dateTime}
-                  fill={clickedRegion === e.id ? 'red' : '#868e96'}
+                  fill={filtered === e.id ? 'red' : '#868e96'}
                   order={99}
                 />
               ))}
@@ -83,7 +83,7 @@ const BarAreaChart = ({ data, start, end }: IChartProps) => {
               fill="#ffa8a8"
               animationDuration={500}
             />
-            {clickedRegion && (
+            {filtered && (
               <Line
                 yAxisId="right"
                 dataKey="value_highlight"

@@ -35,3 +35,7 @@ span.area_value {
   color: #ff8787;
   font-weight: bold;
 }
+
+.selectedFilterBtn {
+  color: red;
+}
