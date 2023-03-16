@@ -10,17 +10,19 @@ const Home = () => {
   const [filtered, setFiltered] = useState<string | null>(null);
 
   return (
-    <div className="outer">
-      <ChartHeader
-        type={chartDatasets.type}
-        version={chartDatasets.version}
-        period={{ start: startDate, end: endDate }}
-      />
-      <ChartFilters
-        regions={getRegionList(chartDatasets.value)}
-        filtered={filtered}
-        setFiltered={setFiltered}
-      />
+    <div>
+      <div className="home_header">
+        <ChartHeader
+          type={chartDatasets.type}
+          version={chartDatasets.version}
+          period={{ start: startDate, end: endDate }}
+        />
+        <ChartFilters
+          regions={getRegionList(chartDatasets.value)}
+          filtered={filtered}
+          setFiltered={setFiltered}
+        />
+      </div>
       <BarAreaChart
         data={chartDatasets.value}
         filtered={filtered}

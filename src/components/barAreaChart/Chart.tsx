@@ -32,7 +32,7 @@ const BarAreaChart = ({ data, filtered, setFiltered }: IChartProps) => {
 
   return (
     <>
-      <div className="inner">
+      <div className="chart">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart
             data={data}

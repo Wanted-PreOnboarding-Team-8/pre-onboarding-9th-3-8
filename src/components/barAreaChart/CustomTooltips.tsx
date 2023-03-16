@@ -5,15 +5,15 @@ const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
     const [bar, area] = payload;
     return (
       <div className="tooltip">
-        <p className="title">{`${bar.payload.id}`}</p>
+        <p className="tooltip_title">{`${bar.payload.id}`}</p>
         <div>
           <p>
             {`${bar.dataKey} : `}
-            <span className="bar_value">{`${bar.value}`}</span>
+            <span className="tooltip_bar_value">{`${bar.value}`}</span>
           </p>
           <p>
             {`${area.dataKey} : `}
-            <span className="area_value">{`${area.value}`}</span>
+            <span className="tooltip_area_value">{`${area.value}`}</span>
           </p>
         </div>
       </div>
