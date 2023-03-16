@@ -13,6 +13,7 @@ import {
 import CustomTooltip from '@/components/CustomTooltips';
 import { IChartProps } from '@/interface/props';
 import { useSearchParams } from 'react-router-dom';
+import CustomDot from './CustomDot';
 
 const Chart = ({ data, start, end }: IChartProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -68,6 +69,8 @@ const Chart = ({ data, start, end }: IChartProps) => {
               dataKey="value_area"
               stroke="#ff8787"
               fill="#ffa8a8"
+              dot={<CustomDot region={region} />}
+              isAnimationActive={false}
             />
           </ComposedChart>
         </ResponsiveContainer>

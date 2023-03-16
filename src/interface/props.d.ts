@@ -9,3 +9,10 @@ export interface IChartProps {
 export interface IChartRegionSelectProps {
   regions: string[];
 }
+
+export interface CustomDotProps {
+  cx?: number;
+  cy?: number;
+  payload?: IChart | undefined;
+  region?: string | null;
+}
