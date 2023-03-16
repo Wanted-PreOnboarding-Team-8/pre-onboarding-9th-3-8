@@ -11,6 +11,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import CustomTooltip from '@/components/barAreaChart/CustomTooltips';
+import { ColorTheme } from '@/constants/theme';
 import { IChartProps } from '@/interface/props';
 import { CategoricalChartState } from 'recharts/types/chart/generateCategoricalChart';
 
@@ -58,11 +59,20 @@ const BarAreaChart = ({ data, filtered, setFiltered }: IChartProps) => {
               content={<CustomTooltip />}
               wrapperStyle={{ outline: 'none' }}
             />
-            <Bar yAxisId="left" dataKey="value_bar" fill="#868e96" barSize={20}>
+            <Bar
+              yAxisId="left"
+              dataKey="value_bar"
+              fill={ColorTheme.BAR_CHART}
+              barSize={20}
+            >
               {data.map((e) => (
                 <Cell
                   key={e.dateTime}
-                  fill={filtered === e.id ? 'red' : '#868e96'}
+                  fill={
+                    filtered === e.id
+                      ? ColorTheme.BAR_HIGHLIGHT
+                      : ColorTheme.BAR_CHART
+                  }
                 />
               ))}
             </Bar>
@@ -70,18 +80,18 @@ const BarAreaChart = ({ data, filtered, setFiltered }: IChartProps) => {
               yAxisId="right"
               type="monotone"
               dataKey="value_area"
-              stroke="#ff8787"
-              fill="#ff8787"
-              opacity={1}
+              stroke={ColorTheme.AREA_CHART}
+              fill={ColorTheme.AREA_CHART}
+              opacity={0.7}
               animationDuration={500}
             />
             {filtered && (
               <Line
                 yAxisId="right"
                 dataKey="value_highlight"
-                stroke="blue"
+                stroke={ColorTheme.AREA_HIGHLIGHT}
                 strokeWidth={3}
-                dot={{ stroke: 'blue', strokeWidth: 5 }}
+                dot={{ stroke: ColorTheme.AREA_HIGHLIGHT, strokeWidth: 5 }}
                 connectNulls={true}
                 animationDuration={500}
               />
