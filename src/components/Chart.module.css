@@ -1,0 +1,85 @@
+.inner {
+  height: 70vh;
+}
+
+/* Chart Filter */
+
+.filter_list {
+  display: flex;
+  gap: var(--p10);
+  padding: 0;
+}
+
+/* Filter Item */
+
+.filter_item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  border: var(--p1) solid var(--blue);
+  width: var(--p80);
+  height: var(--p32);
+  font-size: var(--p14);
+  color: var(--blue);
+  border-radius: var(--p32);
+}
+.checked {
+  border: var(--p2) solid var(--blue);
+  font-weight: bold;
+  background: var(--blue-opacity);
+  cursor: pointer;
+}
+.filter_item label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--p2);
+  padding: var(--p5);
+  cursor: pointer;
+}
+.filter_checkbox {
+  display: none;
+}
+
+.checked_img {
+  display: flex;
+  max-width: var(--p16);
+}
+.checked_img img {
+  width: 100%;
+}
+
+/* Custom Tooltip */
+.tooltip {
+  background-color: var(--white);
+  border: var(--p1) solid var(--light-gray);
+  padding: var(--p4) var(--p10);
+  border-radius: var(--p2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title_container {
+  display: flex;
+}
+.img_position {
+  width: var(--p18);
+}
+.img_position img {
+  width: 100%;
+}
+.title {
+  font-size: var(--p18);
+  margin-bottom: var(--p5);
+}
+
+.bar_value {
+  color: var(--bar);
+  font-weight: bold;
+}
+
+.area_value {
+  color: var(--area);
+  font-weight: bold;
+}

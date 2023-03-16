@@ -7,10 +7,12 @@ export const generateStartAndEndDate = (data: IChart[]) => {
   const dateList = data.map(({ date }) => new Date(date));
 
   const min = minDate(dateList);
-  const start = `${min.getFullYear()}-${min.getMonth() + 1}-${min.getDate()}`;
+  const start = `${min.getFullYear()}년${
+    min.getMonth() + 1
+  }월${min.getDate()}일`;
 
   const max = maxDate(dateList);
-  const end = `${max.getFullYear()}-${max.getMonth() + 1}-${max.getDate()}`;
+  const end = `${max.getFullYear()}년${max.getMonth() + 1}월${max.getDate()}일`;
 
   return { start, end };
 };

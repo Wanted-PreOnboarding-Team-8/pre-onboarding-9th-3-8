@@ -1,3 +1,4 @@
+import styles from './Chart.module.css';
 import {
   XAxis,
   YAxis,
@@ -29,11 +30,12 @@ const Chart = ({ data }: Props) => {
     if (e === null) return;
     if (e.activePayload === undefined) return;
     const value: IChart = e.activePayload[0].payload;
-    setSearchParams({ id: value.id });
+    if (searchParams.get('id') === value.id) setSearchParams({});
+    else setSearchParams({ id: value.id });
   };
 
   return (
-    <div className="inner">
+    <div className={styles.inner}>
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart
           data={data as IChart[]}
@@ -61,13 +63,18 @@ const Chart = ({ data }: Props) => {
             wrapperStyle={{ outline: 'none' }}
           />
           <Legend />
-          <Bar yAxisId="left" dataKey="value_bar" fill="#868e96" barSize={20} />
+          <Bar
+            yAxisId="left"
+            dataKey="value_bar"
+            fill={`var(--bar)`}
+            barSize={20}
+          />
           <Area
             yAxisId="right"
             type="monotone"
             dataKey="value_area"
-            stroke="#ff8787"
-            fill="#ffa8a8"
+            stroke={`var(--area)`}
+            fill={`var(--area)`}
           />
           {filteredData.map((date) => (
             <ReferenceArea
@@ -75,7 +82,7 @@ const Chart = ({ data }: Props) => {
               yAxisId="left"
               x1={date}
               x2={date}
-              fill="#ffff00"
+              fill={`var(--highlight)`}
               fillOpacity={0.3}
             />
           ))}

@@ -1,5 +1,5 @@
-import FilterList from './FilterList';
-import TagList from './TagList';
+import styles from './Chart.module.css';
+import FilterItem from './FilterItem';
 
 type Props = {
   filterList: string[];
@@ -7,10 +7,11 @@ type Props = {
 
 const ChartFilter = ({ filterList }: Props) => {
   return (
-    <div>
-      <FilterList filterList={filterList} />
-      <TagList />
-    </div>
+    <ul className={styles.filter_list}>
+      {filterList.map((item) => (
+        <FilterItem key={item} id={item} />
+      ))}
+    </ul>
   );
 };
 
