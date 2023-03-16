@@ -4,3 +4,9 @@
 .filter_item {
   list-style: none;
 }
+.tag_list {
+  display: flex;
+}
+.tag_item {
+  list-style: none;
+}
