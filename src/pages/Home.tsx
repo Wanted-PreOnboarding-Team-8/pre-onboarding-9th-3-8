@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { useChartDatasets } from '@/lib/hooks/useChartDatasets';
+import { useFilter } from '@/lib/hooks/useFilter';
 import ChartHeader from '@/components/ChartHeader';
 import ChartFilters from '@/components/ChartFilters';
 import BarAreaChart from '@/components/barAreaChart/Chart';
@@ -7,7 +7,7 @@ import { getRegionList } from '@/lib/utils/handleData';
 
 const Home = () => {
   const { chartDatasets, startDate, endDate } = useChartDatasets();
-  const [filtered, setFiltered] = useState<string | null>(null);
+  const { filtered, setFilter } = useFilter();
 
   return (
     <div>
@@ -20,13 +20,13 @@ const Home = () => {
         <ChartFilters
           regions={getRegionList(chartDatasets.value)}
           filtered={filtered}
-          setFiltered={setFiltered}
+          setFiltered={setFilter}
         />
       </div>
       <BarAreaChart
         data={chartDatasets.value}
         filtered={filtered}
-        setFiltered={setFiltered}
+        setFiltered={setFilter}
       />
     </div>
   );

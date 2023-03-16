@@ -3,7 +3,7 @@ import { IChartValue } from './chartData';
 export interface IChartProps {
   data: IChartValue[];
   filtered: string | null;
-  setFiltered: React.Dispatch<React.SetStateAction<string | null>>;
+  setFiltered: (rigion: string | null) => void;
 }
 
 export interface IChartHeaderProps {
@@ -18,5 +18,5 @@ export interface IChartHeaderProps {
 export interface IFilterProps {
   regions: string[];
   filtered: string | null;
-  setFiltered: React.Dispatch<React.SetStateAction<string | null>>;
+  setFiltered: (rigion: string | null) => void;
 }
