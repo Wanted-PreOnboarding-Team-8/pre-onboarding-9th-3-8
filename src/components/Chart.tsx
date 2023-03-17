@@ -19,8 +19,8 @@ const Chart = ({ data, start, end }: IChartProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const region = searchParams.get('region');
 
-  const handleSearchParams = (ids: string[]) => {
-    setSearchParams({ region: ids.join(',') });
+  const handleSearchParams = (ids: string) => {
+    setSearchParams({ region: ids });
   };
 
   return (
@@ -59,7 +59,7 @@ const Chart = ({ data, start, end }: IChartProps) => {
                   cursor="pointer"
                   fill={region?.split(',').includes(v.id) ? '#82ca9d' : '#999'}
                   key={v.date}
-                  onClick={() => handleSearchParams([v.id])}
+                  onClick={() => handleSearchParams(v.id)}
                 />
               ))}
             </Bar>
