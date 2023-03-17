@@ -25,7 +25,6 @@ const Chart = ({
   const chartClickHandler = (e: CategoricalChartState) => {
     if (e && e.activeTooltipIndex)
       setFilterParams({ id: data[e.activeTooltipIndex].id });
-    console.log(paramsId);
   };
   return (
     <>
