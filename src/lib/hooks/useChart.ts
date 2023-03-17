@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { getData } from '@/api/chartData';
 import { API_URL } from '@/constants/url';
 import { IChart } from '@/interface/chartData';
@@ -8,7 +7,6 @@ import transformData from '@/lib/utils/transformData';
 
 const useChart = () => {
   const [charts, setCharts] = useState<IChart[]>([]);
-  const [filterParams, setFilterParams] = useSearchParams();
 
   const { start, end } = generateStartAndEndDate(charts);
 
@@ -23,7 +21,7 @@ const useChart = () => {
     getCharts();
   }, []);
 
-  return { charts, start, end, filterParams, setFilterParams };
+  return { charts, start, end };
 };
 
 export default useChart;

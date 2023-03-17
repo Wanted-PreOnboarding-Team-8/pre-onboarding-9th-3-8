@@ -1,9 +1,11 @@
 import Chart from '@/components/chart/Chart';
 import Filter from '@/components/filter/Filter';
 import useChart from '@/lib/hooks/useChart';
+import { useSearchParams } from 'react-router-dom';
 
 const Home = () => {
-  const { charts, start, end, filterParams, setFilterParams } = useChart();
+  const { charts, start, end } = useChart();
+  const [filterParams, setFilterParams] = useSearchParams();
 
   return (
     <div className="outer">
