@@ -12,6 +12,7 @@ const Home = () => {
         start={start}
         end={end}
         filterParams={filterParams}
+        setFilterParams={setFilterParams}
       />
       <Filter data={charts} setFilterParams={setFilterParams} />
     </div>

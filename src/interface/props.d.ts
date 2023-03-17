@@ -5,6 +5,7 @@ export interface IChartProps {
   start: string;
   end: string;
   filterParams: URLSearchParams;
+  setFilterParams: SetURLSearchParams;
 }
 export interface IFilterProps {
   data: IChart[];

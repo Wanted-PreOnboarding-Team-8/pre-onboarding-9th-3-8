@@ -8,14 +8,25 @@ import {
   Bar,
   ComposedChart,
   ResponsiveContainer,
+  Cell,
 } from 'recharts';
 import CustomTooltip from '@/components/chart/CustomTooltips';
 import { IChartProps } from '@/interface/props';
+import { CategoricalChartState } from 'recharts/types/chart/generateCategoricalChart';
 
-const Chart = ({ data, start, end, filterParams }: IChartProps) => {
+const Chart = ({
+  data,
+  start,
+  end,
+  filterParams,
+  setFilterParams,
+}: IChartProps) => {
   const paramsId = filterParams.get('id');
-
-  console.log(paramsId);
+  const chartClickHandler = (e: CategoricalChartState) => {
+    if (e && e.activeTooltipIndex)
+      setFilterParams({ id: data[e.activeTooltipIndex].id });
+    console.log(paramsId);
+  };
   return (
     <>
       <h1>{`${start} ~ ${end}`}</h1>
@@ -28,7 +39,23 @@ const Chart = ({ data, start, end, filterParams }: IChartProps) => {
               right: 30,
               left: 20,
             }}
+            onClick={(e) => chartClickHandler(e)}
           >
+            <defs>
+              <linearGradient id="gradient">
+                {data.map((element, index) => (
+                  <stop
+                    key={`${element.id}${index}`}
+                    offset={`${100 - ((100 - index - 1) / (100 - 1)) * 100}%`}
+                    stopColor={
+                      element.id === paramsId || paramsId === 'all'
+                        ? '#60C42B'
+                        : '#ECFCD4'
+                    }
+                  />
+                ))}
+              </linearGradient>
+            </defs>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="date" />
             <YAxis
@@ -46,18 +73,25 @@ const Chart = ({ data, start, end, filterParams }: IChartProps) => {
               wrapperStyle={{ outline: 'none' }}
             />
             <Legend />
-            <Bar
-              yAxisId="left"
-              dataKey="value_bar"
-              fill={'#868e96'}
-              barSize={20}
-            />
+            <Bar yAxisId="left" dataKey="value_bar" barSize={20}>
+              {data.map((element, index) => (
+                <Cell
+                  key={`${element.id}${index}`}
+                  fill={
+                    element.id === paramsId || paramsId === 'all'
+                      ? '#84A9FF'
+                      : '#D6E4FF'
+                  }
+                  onClick={() => setFilterParams({ id: element.id })}
+                />
+              ))}
+            </Bar>
             <Area
               yAxisId="right"
               type="monotone"
               dataKey="value_area"
-              stroke="#ff8787"
-              fill="#ffa8a8"
+              stroke="#FFE7D7"
+              fill="url(#gradient)"
             />
           </ComposedChart>
         </ResponsiveContainer>
